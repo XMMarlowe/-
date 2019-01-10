@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main()
+{
+	int a[10],i,sum=0;
+	float aver;
+	for(i=0;i<10;i++)
+	{
+	scanf("%d",&a[i]);
+	sum+=a[i];
+	}	
+	aver=sum/10.0;
+	printf("%.1f\n",aver);
+	for(i=0;i<10;i++)
+	{
+		if(a[i]>aver)
+		printf("%d ",a[i]);
+	}
+ return 0;
+ }
