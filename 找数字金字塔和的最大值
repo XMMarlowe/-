@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+int findmax(int a[100][100],int len)
+{
+	int i=0;
+	int max=0;
+	for(i=0;i<len;i++)
+		if(max<a[len-1][i])
+			max=a[len-1][i]; 
+	return max;
+}
+int main()
+{
+	int x,sum=0;
+	int a[100][100];
+	int i=0,j=0;
+	printf("请输入三角形的行数（1-100）\n");
+	scanf("%d",&x);
+	
+	printf("请输入三角形\n");
+	for(i=0;i<x;i++)
+		{
+			for(j=0;j<=i;j++)
+				scanf("%d",&a[i][j]);
+		}
+		 
+	for(i=0;i<5;i++)
+		{
+			sum+=findmax(a,i+1);
+		}
+	printf("%d\n",sum);
+	system("pause");
+	return 0;
+ } 
