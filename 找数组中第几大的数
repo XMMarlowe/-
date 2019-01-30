@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+void sort(int *a,int n)
+{
+	int i=0,j=0,t=0;
+	for(i=0;i<n-1;i++)
+	{
+		for(j=0;j<n-1-i;j++)
+		{
+			if(a[j]<a[j+1])
+			{
+				t=a[j];
+				a[j]=a[j+1];
+				a[j+1]=t;
+			} 
+		} 
+	}
+	
+}
+int main()
+{
+	int k=0,n;
+	int a[1024];
+	printf("请输入数组长度\n");
+	scanf("%d",&n);
+	
+	printf("请输入数组\n");
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+		
+	}
+	printf("请输入你要查找的第几大的数\n");
+	scanf("%d",&k);
+	sort(a,n);
+	printf("%d",a[k-1]);
+	system("pause");
+	return 0;
+ } 
