@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node *PtrToNode;
+struct node{
+    int a;
+    PtrToNode next;
+};
+typedef PtrToNode L;
+
+L Read()//读入链表
+{
+	L tail=NULL;
+	L newNode=NULL;
+	L head=NULL;
+	while(1)
+	{
+	    newNode= (L)malloc(sizeof(struct node));
+		scanf("%d",&newNode->a);
+		if(newNode->a== -1)
+		{
+            free(newNode);
+            break;
+		}
+		if(head==NULL)
+            head=tail=newNode;
+		tail->next=newNode;
+		tail=tail->next;
+		tail->next=NULL;
+	}
+	return head;
+}
+/*
+void Attach(int data,L *rear)
+{
+	L p;
+	p = (L)malloc(sizeof(struct node));
+	p->a = data;
+	p->next = NULL;
+	(*rear)->next = p;
+	*rear = p;
+}*/
+void Print_list(L p)//打印链表
+{
+	int flag = 0;
+	if(p == NULL)
+	printf("NULL");
+
+	while(p)
+	{
+		if(!flag)//设置flag是为了第一次正常输出，不输出空格
+		{
+			printf("%d",p->a);
+			flag = 1;
+		}
+		else 
+			printf(" %d",p->a);
+		p = p->next;
+	}
+}
+
+L List_orderly_merge(L p1,L p2)
+{
+	L p,temp = NULL,temp1;
+    p = (L)malloc(sizeof(struct node));
+    p->next = NULL;
+	temp = p;
+	while(p1 && p2)//依次比较两个链表每个数的大小
+	{
+		if(p1->a >= p2->a)
+		{
+			p->next = p2;
+			p = p2;
+			p2 = p2->next;
+		}
+		else 
+		{
+			p->next = p1;
+			p = p1;
+			p1 = p1->next;
+		}
+		
+	}
+	while(p1)//将p1链表剩下的接到p后面
+	{
+		p->next = p1;
+		p = p1;
+		p1 = p1->next;
+	}
+	while(p2)//将p2链表剩下的接到p后面
+	{
+		p->next = p2;
+		p = p2;
+		p2 = p2->next;
+	}
+	temp1 = temp; temp = temp->next; free(temp1);//删除最开始申请的临时节点
+	return temp;
+}
+
+int main()
+{
+
+	L p1,p2,p;
+	p1 = Read();
+	p2 = Read();
+	p = List_orderly_merge(p1, p2);
+	Print_list(p);
+	return 0;
+}
